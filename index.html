@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>PHP Google Translate</title>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+            <h1 class="title">
+                PHP Google Translate
+            </h1>
+            <p class="subtitle">
+                Ömer Faruk <strong>DAĞ</strong>
+              </p>
+        </div>
+        <form id="form" method="post" class="box mt-5">
+            <div class="field">
+                <label class="label">Dil</label>
+                <div class="control">
+                    <div class="select">
+                        <select name="language" required>
+                            <option value="tr">Türkçe</option>
+                            <option value="az">Azerice</option>
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                            <option value="it">Italiano</option>
+                            <option value="ru">Русский</option>
+                            <option value="uk">Українська</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Metin</label>
+                <div class="control">
+                    <textarea class="textarea" name="text" required placeholder="Bir şeyler yaz..."></textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <button type="submit" class="button is-link is-light">Çevir</button>
+                </div>
+            </div>
+        </form>
+        <div id="result" class="mt-3"></div>
+    </section>
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var result = document.querySelector('#result');
+            result.classList.remove('notification');
+            result.innerHTML = '';
+            var form = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'api.php');
+            xhr.send(form);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    result.classList.add('notification');
+                    result.innerHTML = xhr.responseText;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
