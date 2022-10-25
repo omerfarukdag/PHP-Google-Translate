@@ -67,7 +67,7 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     result.classList.add('notification');
-                    result.innerHTML = xhr.responseText;
+                    result.innerHTML = JSON.parse(xhr.responseText).text;
                 }
             }
         });
